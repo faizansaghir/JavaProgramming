@@ -1,0 +1,52 @@
+import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class UniversalTree {
+    static int cons;
+    public static void getSub(int ind,int len,ArrayList<Integer> ars,int[] ar){
+        if(ind*2+1<len){
+            if(ar[ind*2+1]!=cons)
+            ars.add(ar[ind*2+1]);
+        }
+        if(ind*2+2<len){
+            if(ar[ind*2+2]!=cons)
+            ars.add(ar[ind*2+2]);
+        }
+        if(ind*2+1<len){
+            getSub(ind*2+1,len,ars,ar);
+        }
+        if(ind*2+2<len){
+            getSub(ind*2+2,len,ars,ar);
+        }
+    }
+    public static boolean checkUniversal(ArrayList<Integer> ars){
+        for(int i=0,p=ars.get(0);i<ars.size();i++){
+            if(p!=ars.get(i))
+                return false;
+        }
+        return true;
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int[] ar={2,3,3,3,3,3,3,0,0,0,0,4};
+        cons=0;
+        int len=ar.length;
+        System.out.printf("Enter index of element(%d to %d)",0,(len-1));
+        int ind=sc.nextInt();
+        ArrayList<Integer> ars=new ArrayList<>();
+        if(ar[ind]!=cons) {
+            ars.add(ar[ind]);
+            getSub(ind, len, ars, ar);
+            for(int i=0;i<ars.size();i++){
+                System.out.print(ars.get(i)+" ");
+            }
+            System.out.println();
+            System.out.println("Universal:"+checkUniversal(ars));
+        }
+        else{
+            System.out.printf("No Elements At Index %d",ind);
+        }
+    }
+}
