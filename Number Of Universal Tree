@@ -1,0 +1,81 @@
+/*
+Code to find the number of universal tree in a given binary tree
+*/
+
+import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class UniversalTree {
+    public static int universal(int[] ar,int cur,int[] coun){
+        if(ar[cur]!=0) {
+            if (cur == 0) {
+                int[] count = {0};
+                int l = 1;
+                int r = 2;
+                int lt, rt;
+                lt = 1;
+                rt = 1;
+                if (l < ar.length) {
+                    if (ar[l] != 0) {
+                        lt = universal(ar, l, count);
+                        if (lt == 1) {
+                            lt = ar[cur] == ar[l] ? 1 : 0;
+                        }
+                    }
+                }
+                if (r < ar.length) {
+                    if (ar[r] != 0) {
+                        rt = universal(ar, r, count);
+                        if (rt == 1) {
+                            rt = ar[cur] == ar[r] ? 1 : 0;
+                        }
+                    }
+                }
+                if (lt == 1 && rt == 1) {
+                    count[0]++;
+                }
+                return count[0];
+            } else {
+                int l = cur * 2 + 1;
+                int r = cur * 2 + 2;
+                int lt, rt;
+                lt = 1;
+                rt = 1;
+                if (l < ar.length) {
+                    if (ar[l] != 0) {
+                        lt = universal(ar, l, coun);
+                        if (lt == 1) {
+                            lt = ar[cur] == ar[l] ? 1 : 0;
+                        }
+                    }
+                }
+                if (r < ar.length) {
+                    if (ar[r] != 0) {
+                        rt = universal(ar, l, coun);
+                        if (rt == 1) {
+                            rt = ar[cur] == ar[r] ? 1 : 0;
+                        }
+                    }
+                }
+                if (lt == 1 && rt == 1) {
+                    coun[0]++;
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+        else{
+            return 1;
+        }
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int[] ar={1,2,0,2,0,0,0,2};
+        int[] p=new int[1];
+        int x=universal(ar,0,p);
+        System.out.println(x);
+    }
+}
