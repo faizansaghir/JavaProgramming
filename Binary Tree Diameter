@@ -1,0 +1,83 @@
+/*
+Code for finding the maximum diameter of a binary tree
+*/
+
+public class Max_Diameter {
+    public static String diameter(int[] ar,int cur){
+            int l=cur*2+1;
+            int r=cur*2+2;
+            String lt="0l0r0";
+            String rt="0l0r0";
+            if(l<ar.length){
+                if(ar[l]!=0){
+                    lt=diameter(ar,l);
+                }
+            }
+            if(r<ar.length){
+                if(ar[r]!=0){
+                    rt=diameter(ar,r);
+                }
+            }
+            int i=0,ltmax=0,rtmax=0,ltlpos,max,lmax=0,rmax=0;
+            boolean flag=false;
+            while(true){
+                if(lt.charAt(i)!='l'){
+                    ltmax=ltmax*10+Integer.parseInt(""+lt.charAt(i));
+                    i++;
+                }
+                else{
+                    ltlpos=i+1;
+                    break;
+                }
+            }
+            i=0;
+            while(true){
+                if(rt.charAt(i)!='l'){
+                    rtmax=rtmax*10+Integer.parseInt(""+rt.charAt(i));
+                    i++;
+                }
+                else{
+                    break;
+                }
+            }
+            if(ltmax>rtmax){
+                max=ltmax;
+            }
+            else{
+                max=rtmax;
+            }
+            for(i=ltlpos;true;i++){
+                if(lt.charAt(i)!='r'){
+                    lmax=lmax*10+Integer.parseInt(""+lt.charAt(i));
+                }
+                else{
+                    break;
+                }
+            }
+            for(i=0;i<rt.length();i++){
+                if(flag){
+                    rmax=rmax*10+Integer.parseInt(""+rt.charAt(i));
+                }
+                else if(rt.charAt(i)=='r'){
+                    flag =true;
+                }
+            }
+            if(++lmax>max){
+                max=lmax;
+            }
+            if(++rmax>max){
+                max=rmax;
+            }
+            if(cur==0){
+                return(max+"");
+            }
+            else {
+                return (max + "l" + lmax + "r" + rmax);
+            }
+    }
+    public static void main(String[] args){
+        int[] ar={1,1,1,1,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1};
+        int max=Integer.parseInt(diameter(ar,0));
+        System.out.println(max);
+    }
+}
