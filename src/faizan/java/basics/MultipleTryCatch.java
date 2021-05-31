@@ -1,4 +1,4 @@
-package javaForInterview;
+package faizan.java.basics;
 
 import java.io.IOException;
 

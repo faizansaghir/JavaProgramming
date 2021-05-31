@@ -1,3 +1,5 @@
+package faizan.java.basics;
+
 import java.util.ArrayList;
 
 public class DiagonalSum {

@@ -1,3 +1,4 @@
+package faizan.java.basics;
 
 public class CountingSort {
 	public static int[] getCountArray(int[] arr) {
