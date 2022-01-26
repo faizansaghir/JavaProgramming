@@ -3,9 +3,12 @@ package faizan.java.basics.graphs;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class AdjacencyListUndirectedUnweightedGraph extends UndirectedUnweightedGraph {
 	List<Set<Integer>> graph;
@@ -33,6 +36,116 @@ public class AdjacencyListUndirectedUnweightedGraph extends UndirectedUnweighted
 		for(int i=0;i<graph.size();i++) {
 			int vertex=i;
 			System.out.println(vertex+" -> "+graph.get(vertex));
+		}
+	}
+	@Override
+	public void breadthFirstTraverse(int start) {
+		System.out.println("Breadth first traversal");
+		boolean[] visited=new boolean[graph.size()];
+		Queue<Integer> nexts=new LinkedList<>();
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.isEmpty()) {
+			int index=nexts.poll();
+			System.out.print(index+" ");
+			Set<Integer> adjacentNodes=graph.get(index);
+			for(int adjacentNode:adjacentNodes) {
+				if(!visited[adjacentNode]) {
+					nexts.add(adjacentNode);
+					visited[adjacentNode]=true;
+				}
+			}
+		}
+		System.out.println();
+	}
+	public void breadthFirstTraverse() {
+		System.out.println("Breadth first traversal modified");
+		boolean[] visited=new boolean[graph.size()];
+		Queue<Integer> nexts=new LinkedList<>();
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				nexts.add(i);
+				visited[i]=true;
+				while(!nexts.isEmpty()) {
+					int index=nexts.poll();
+					System.out.print(index+" ");
+					Set<Integer> adjacentNodes=graph.get(index);
+					for(int adjacentNode:adjacentNodes) {
+						if(!visited[adjacentNode]) {
+							nexts.add(adjacentNode);
+							visited[adjacentNode]=true;
+						}
+					}
+				}
+			}
+		}
+		System.out.println();
+	}
+	public void depthFirstTraverse(int start) {
+		System.out.println("Depth first traversal");
+		Stack<Integer> nexts=new Stack<>();
+		boolean[] visited=new boolean[graph.size()];
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.empty()) {
+			int vertex=nexts.pop();
+			System.out.print(vertex+" ");
+			Set<Integer> adjacetNodes=graph.get(vertex);
+			for(int adjacentNode:adjacetNodes) {
+				if(!visited[adjacentNode]) {
+					visited[adjacentNode]=true;
+					nexts.add(adjacentNode);
+				}
+			}
+		}
+		System.out.println();
+	}
+	public void depthFirstTraverse() {
+		System.out.println("Depth first traversal modified");
+		Stack<Integer> nexts=new Stack<>();
+		boolean[] visited=new boolean[graph.size()];
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				nexts.add(i);
+				visited[i]=true;
+				while(!nexts.empty()) {
+					int vertex=nexts.pop();
+					System.out.print(vertex+" ");
+					Set<Integer> adjacetNodes=graph.get(vertex);
+					for(int adjacentNode:adjacetNodes) {
+						if(!visited[adjacentNode]) {
+							visited[adjacentNode]=true;
+							nexts.add(adjacentNode);
+						}
+					}
+				}				
+			}
+		}
+		System.out.println();
+	}
+	public void depthFirstTraverseRecursive() {
+		System.out.println("Depth first traversal recursive modified");
+		boolean[] visited=new boolean[graph.size()];
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i])
+				depthFirstTraverse(i,visited);			
+		}
+		System.out.println();
+	}
+	public void depthFirstTraverseRecursive(int start) {
+		System.out.println("Depth first traversal recursive");
+		boolean[] visited=new boolean[graph.size()];
+		depthFirstTraverse(start,visited);
+		System.out.println();
+	}
+	private void depthFirstTraverse(int root,boolean[] visited) {
+		System.out.print(root+" ");
+		visited[root]=true;
+		Set<Integer> adjacentNodes=graph.get(root);
+		for(int adjacentNode:adjacentNodes) {
+			if(!visited[adjacentNode]) {
+				depthFirstTraverse(adjacentNode,visited);
+			}
 		}
 	}
 }

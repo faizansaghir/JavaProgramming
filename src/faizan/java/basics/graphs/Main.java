@@ -18,7 +18,7 @@ public class Main {
 		graph2.addEdge(1, 4);
 		graph2.addEdge(2, 3);
 		graph2.addEdge(2, 4);
-		graph2.printGraph();
+		graph2.printGraph();		
 		UndirectedUnweightedGraph graph3=new MapUndirectedUnweightedGraph();
 		graph3.addEdge(0, 1);
 		graph3.addEdge(0, 2);
@@ -105,6 +105,20 @@ public class Main {
 		graph12.addEdge(3, 2, 1);
 		graph12.addEdge(4, 1, 2);
 		graph12.printGraph();
+		AdjacencyListUndirectedUnweightedGraph graph13=new AdjacencyListUndirectedUnweightedGraph(6);
+		graph13.addEdge(0, 1);
+		graph13.addEdge(1, 3);
+		graph13.addEdge(1, 4);
+		graph13.addEdge(3, 4);
+		graph13.addEdge(3, 5);
+		graph13.addEdge(4, 5);
+		graph13.printGraph();
+		graph13.breadthFirstTraverse(3);
+		graph13.breadthFirstTraverse();
+		graph13.depthFirstTraverse(0);
+		graph13.depthFirstTraverseRecursive(0);
+		graph13.depthFirstTraverse();
+		graph13.depthFirstTraverseRecursive();
 	}
 
 }
