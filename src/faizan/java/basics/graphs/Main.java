@@ -119,6 +119,40 @@ public class Main {
 		graph13.depthFirstTraverseRecursive(0);
 		graph13.depthFirstTraverse();
 		graph13.depthFirstTraverseRecursive();
+		AdjacencyMatrixUndirectedWeightedGraph graph14=new AdjacencyMatrixUndirectedWeightedGraph(9);
+		graph14.addEdge(0, 1, 4);
+		graph14.addEdge(0, 7, 8);
+		graph14.addEdge(1, 2, 8);
+		graph14.addEdge(1, 7, 11);
+		graph14.addEdge(2, 3, 7);
+		graph14.addEdge(2, 5, 4);
+		graph14.addEdge(2, 8, 2);
+		graph14.addEdge(3, 4, 9);
+		graph14.addEdge(3, 5, 14);
+		graph14.addEdge(4, 5, 10);
+		graph14.addEdge(5, 6, 2);
+		graph14.addEdge(6, 7, 1);
+		graph14.addEdge(6, 8, 6);
+		graph14.addEdge(7, 8, 7);
+		graph14.printGraph();
+		graph14.getShortestPrathTree(0);
+		AdjacencyListUndirectedWeightedGraph graph15=new AdjacencyListUndirectedWeightedGraph(9);
+		graph15.addEdge(0, 1, 4);
+		graph15.addEdge(0, 7, 8);
+		graph15.addEdge(1, 2, 8);
+		graph15.addEdge(1, 7, 11);
+		graph15.addEdge(2, 3, 7);
+		graph15.addEdge(2, 5, 4);
+		graph15.addEdge(2, 8, 2);
+		graph15.addEdge(3, 4, 9);
+		graph15.addEdge(3, 5, 14);
+		graph15.addEdge(4, 5, 10);
+		graph15.addEdge(5, 6, 2);
+		graph15.addEdge(6, 7, 1);
+		graph15.addEdge(6, 8, 6);
+		graph15.addEdge(7, 8, 7);
+		graph15.printGraph();
+		graph15.getShortestPrathTree(0);
 	}
 
 }
