@@ -7,26 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AdjacencyListDirectedWeightedGraph extends DirectedWeightedGraph{
-	List<Set<List<Integer>>> graph;
-	public AdjacencyListDirectedWeightedGraph(int size) {
-		graph=new ArrayList<>();
-		for(int i=0;i<size;i++) {
-			graph.add(new HashSet<>());
-		}
+public class MapDirectedWeightedGraph extends DirectedWeightedGraph {
+	Map<Integer,Set<List<Integer>>> graph;
+	public MapDirectedWeightedGraph() {
+		graph=new HashMap<>();
 	}
 	@Override
 	public void addEdge(int u, int v, int w) {
-		Set<List<Integer>> adjacent=graph.get(u);
+		Set<List<Integer>> adjacent=graph.getOrDefault(u, new HashSet<>());
 		List<Integer> pair=new ArrayList<>();
 		pair.add(v);
 		pair.add(w);
 		adjacent.add(pair);
+		graph.put(u, adjacent);
 	}
 
 	@Override
 	public boolean pathExists(int u, int v) {
 		Set<List<Integer>> adjacent=graph.get(u);
+		if(adjacent==null)
+			return false;
 		for(List<Integer> pair:adjacent) {
 			if(pair.get(0)==v)
 				return true;
@@ -36,9 +36,8 @@ public class AdjacencyListDirectedWeightedGraph extends DirectedWeightedGraph{
 
 	@Override
 	public void printGraph() {
-		System.out.println("Adjacency List Directed Weighted Graph");
-		for(int i=0;i<graph.size();i++) {
-			int vertex=i;
+		System.out.println("Map Directed Weighted Graph");
+		for(int vertex:graph.keySet()) {
 			System.out.println(vertex+" -> "+graph.get(vertex));
 		}
 	}
@@ -54,5 +53,4 @@ public class AdjacencyListDirectedWeightedGraph extends DirectedWeightedGraph{
 		}
 		return 0;
 	}
-
 }

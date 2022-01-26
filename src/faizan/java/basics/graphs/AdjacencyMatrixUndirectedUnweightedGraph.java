@@ -5,13 +5,16 @@ public class AdjacencyMatrixUndirectedUnweightedGraph extends UndirectedUnweight
 	AdjacencyMatrixUndirectedUnweightedGraph(int size){
 		graph=new int[size][size];
 	}
+	@Override
 	public void addEdge(int u,int v) {
 		graph[u][v]=1;
 		graph[v][u]=1;
 	}
+	@Override
 	public boolean areConnected(int u,int v) {
 		return graph[u][v]==1;
 	}
+	@Override
 	public void printGraph() {
 		System.out.println("Adjacency Matrix Undirected Unweighted Graph");
 		for(int[] node:graph) {

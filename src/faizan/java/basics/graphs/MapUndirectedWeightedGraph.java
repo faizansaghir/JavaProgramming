@@ -7,31 +7,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AdjacencyListUndirectedWeightedGraph extends UndirectedWeightedGraph{
-	List<Set<List<Integer>>> graph;
-	public AdjacencyListUndirectedWeightedGraph(int size) {
-		graph=new ArrayList<>(size);
-		for(int i=0;i<size;i++) {
-			graph.add(new HashSet<>());
-		}
+public class MapUndirectedWeightedGraph extends UndirectedWeightedGraph{
+	Map<Integer,Set<List<Integer>>> graph;
+	public MapUndirectedWeightedGraph() {
+		graph=new HashMap<>();
 	}
 	@Override
 	public void addEdge(int u, int v, int w) {
-		Set<List<Integer>> uAdjacent=graph.get(u);
+		Set<List<Integer>> uAdjacent=graph.getOrDefault(u, new HashSet<>());
 		List<Integer> uPair=new ArrayList<>();
 		uPair.add(v);
 		uPair.add(w);
 		uAdjacent.add(uPair);
-		Set<List<Integer>> vAdjacent=graph.get(v);
+		graph.put(u, uAdjacent);
+		Set<List<Integer>> vAdjacent=graph.getOrDefault(v, new HashSet<>());
 		List<Integer> vPair=new ArrayList<>();
 		vPair.add(u);
 		vPair.add(w);
 		vAdjacent.add(vPair);
+		graph.put(v, vAdjacent);
 	}
 
 	@Override
 	public boolean areConnected(int u, int v) {
 		Set<List<Integer>> adjacent=graph.get(u);
+		if(adjacent==null)
+			return false;
 		for(List<Integer> pair:adjacent) {
 			if(pair.get(0)==v)
 				return true;
@@ -41,9 +42,8 @@ public class AdjacencyListUndirectedWeightedGraph extends UndirectedWeightedGrap
 
 	@Override
 	public void printGraph() {
-		System.out.println("Adjacency List Undirected Weighted Graph");
-		for(int i=0;i<graph.size();i++) {
-			int vertex=i;
+		System.out.println("Map Undirected Weighted Graph");
+		for(int vertex:graph.keySet()) {
 			System.out.println(vertex+" -> "+graph.get(vertex));
 		}
 	}
@@ -51,11 +51,12 @@ public class AdjacencyListUndirectedWeightedGraph extends UndirectedWeightedGrap
 	@Override
 	public int getWeight(int u, int v) {
 		Set<List<Integer>> adjacent=graph.get(u);
+		if(adjacent==null)
+			return 0;
 		for(List<Integer> pair:adjacent) {
 			if(pair.get(0)==v)
 				return pair.get(1);
 		}
 		return 0;
 	}
-
 }

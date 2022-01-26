@@ -1,38 +1,36 @@
 package faizan.java.basics.graphs;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 public class AdjacencyListDirectedUnweightedGraph extends DirectedUnweightedGraph {
-	Map<Integer,Set<Integer>> graph;
-	public AdjacencyListDirectedUnweightedGraph() {
-		// TODO Auto-generated constructor stub
-		graph=new HashMap<>();
+	List<Set<Integer>> graph;
+	public AdjacencyListDirectedUnweightedGraph(int size) {
+		graph=new ArrayList<>(size);
+		for(int i=0;i<size;i++) {
+			graph.add(new HashSet<>());
+		}
+		
 	}
 	@Override
 	public void addEdge(int u, int v) {
-		// TODO Auto-generated method stub
-		Set<Integer> adjacent=graph.getOrDefault(u, new HashSet<>());
+		Set<Integer> adjacent=graph.get(u);
 		adjacent.add(v);
-		graph.put(u,adjacent);
 	}
 
 	@Override
 	public boolean pathExists(int u, int v) {
-		// TODO Auto-generated method stub
 		Set<Integer> adjacent=graph.get(u);
-		if(adjacent==null)
-			return false;
 		return adjacent.contains(v);
 	}
 
 	@Override
 	public void printGraph() {
-		// TODO Auto-generated method stub
 		System.out.println("Adjacency List Directed Unweighted Graph");
-		for(int vertex:graph.keySet()) {
+		for(int i=0;i<graph.size();i++) {
+			int vertex=i;
 			System.out.println(vertex+" -> "+graph.get(vertex));
 		}
 	}
