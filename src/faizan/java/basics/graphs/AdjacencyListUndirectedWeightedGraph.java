@@ -62,7 +62,6 @@ public class AdjacencyListUndirectedWeightedGraph extends UndirectedWeightedGrap
 		distances[source]=0;
 		remainingNodes.add(new GraphWeightedNode(source, 0));
 		while(remainingNodes.size()>0){
-			
 			GraphWeightedNode node=remainingNodes.poll();
 			int ind=node.index;
 			if(sptNodes[ind])
