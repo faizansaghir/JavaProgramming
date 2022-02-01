@@ -1,6 +1,5 @@
 package faizan.java.basics.graphs;
 
-import java.util.Set;
 
 public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGraph{
 	int[][] graph;
@@ -32,6 +31,7 @@ public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGr
 	public int getWeight(int u, int v) {
 		return graph[u][v];
 	}
+	@Override
 	public void getShortestPrathTree(int source) {
 		boolean[] sptSet=new boolean[graph.length];
 		int[] distances=new int[graph.length];

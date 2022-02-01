@@ -5,4 +5,5 @@ public abstract class UndirectedWeightedGraph {
 	public abstract boolean areConnected(int u,int v);
 	public abstract void printGraph();
 	public abstract int getWeight(int u,int v);
+	public abstract void getShortestPrathTree(int source);
 }

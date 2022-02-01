@@ -52,6 +52,7 @@ public class AdjacencyListUndirectedWeightedGraph extends UndirectedWeightedGrap
 		}
 		return 0;
 	}
+	@Override
 	public void getShortestPrathTree(int source) {
 		PriorityQueue<GraphWeightedNode> remainingNodes=new PriorityQueue<>();
 		boolean[] sptNodes=new boolean[graph.size()];
