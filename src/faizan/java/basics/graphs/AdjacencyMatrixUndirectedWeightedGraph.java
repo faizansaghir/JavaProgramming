@@ -1,5 +1,9 @@
 package faizan.java.basics.graphs;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGraph{
 	int[][] graph;
@@ -64,5 +68,58 @@ public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGr
 			}
 		}
 		return index;
+	}
+	@Override
+	public boolean isCyclic() {	
+		int v=graph.length;
+		int[] parents=new int[v];
+		for(int i=0;i<v;i++) {
+			parents[i]=i;
+		}
+		Set<String> edgesConsidered=new HashSet<>();
+		Queue<Integer> nexts=new LinkedList<>();
+		boolean[] visited=new boolean[v];
+		nexts.add(0);
+		visited[0]=true;
+		while(!nexts.isEmpty()) {
+			int source=nexts.poll();
+			int[] weights=graph[source];
+			for(int i=0;i<weights.length;i++) {
+				int weight=weights[i];
+				if(weight==0 || i==source)
+					continue;
+				int destination=i;
+				int lesser=source<destination?source:destination;
+				int greater=source<destination?destination:source;
+				String key=lesser+" "+greater;
+				if(edgesConsidered.contains(key)) {
+					continue;
+				}
+				else {
+					edgesConsidered.add(key);
+				}
+				if(!visited[destination]) {
+					visited[destination]=true;
+					nexts.add(destination);
+				}
+				if(getParent(source,parents)==getParent(destination,parents))
+					return true;
+				else
+					union(source,destination,parents);
+			}
+		}
+		return false;
+	}
+	private void union(int source,int dest,int[] parent) {
+		int sParent=getParent(source,parent);
+		int dParent=getParent(dest,parent);
+		if(sParent==dParent)
+			return;
+		parent[dParent]=sParent;		
+	}
+	private int getParent(int vertex,int[] parents) {
+		if(parents[vertex]!=vertex)
+			parents[vertex]=getParent(parents[vertex],parents);
+		return parents[vertex];
 	}
 }

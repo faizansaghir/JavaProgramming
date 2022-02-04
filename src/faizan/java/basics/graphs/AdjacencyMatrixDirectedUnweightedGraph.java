@@ -3,7 +3,6 @@ package faizan.java.basics.graphs;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Set;
 import java.util.Stack;
 
 public class AdjacencyMatrixDirectedUnweightedGraph extends DirectedUnweightedGraph {
@@ -104,6 +103,76 @@ public class AdjacencyMatrixDirectedUnweightedGraph extends DirectedUnweightedGr
 			}
 		}
 		result.add(index);
+	}
+	@Override
+	public void breadthFirstTraverse(int start) {
+		System.out.println("Breadth first traversal");
+		Queue<Integer> nexts=new LinkedList<>();
+		boolean[] visited=new boolean[graph.length];
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.isEmpty()) {
+			int source=nexts.poll();
+			System.out.print(source+" ");
+			int[] adjacentNodes=graph[source];
+			for(int dest=0;dest<adjacentNodes.length;dest++) {
+				int weight=adjacentNodes[dest];
+				if(weight==0)
+					continue;
+				if(!visited[dest]) {
+					visited[dest]=true;
+					nexts.add(dest);
+				}
+			}
+		}
+		System.out.println();
+	}
+	@Override
+	public void breadthFirstTraverse() {
+		System.out.println("Breadth first traversal modified");
+		Queue<Integer> nexts=new LinkedList<>();
+		boolean[] visited=new boolean[graph.length];
+		for(int i=0;i<graph.length;i++) {
+			if(!visited[i]) {
+				visited[i]=true;
+				nexts.add(i);
+			}
+			while(!nexts.isEmpty()) {
+				int source=nexts.poll();
+				System.out.print(source+" ");
+				int[] adjacentNodes=graph[source];
+				for(int dest=0;dest<adjacentNodes.length;dest++) {
+					int weight=adjacentNodes[dest];
+					if(weight==0)
+						continue;
+					if(!visited[dest]) {
+						visited[dest]=true;
+						nexts.add(dest);
+					}
+				}
+			}
+		}
+		System.out.println();
+	}
+	@Override
+	public void depthFirstTraverse(int start) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverse() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverseRecursive(int start) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverseRecursive() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

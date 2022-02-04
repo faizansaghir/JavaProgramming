@@ -106,5 +106,70 @@ public class AdjacencyListDirectedUnweightedGraph extends DirectedUnweightedGrap
 		}
 		result.add(index);
 	}
+	@Override
+	public void breadthFirstTraverse(int start) {
+		System.out.println("Breadth first traversal");
+		Queue<Integer> nexts=new LinkedList<>();
+		boolean[] visited=new boolean[graph.size()];
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.isEmpty()) {
+			int source=nexts.poll();
+			System.out.print(source+" ");
+			Set<Integer> adjacentNodes=graph.get(source);
+			for(int adjacentNode:adjacentNodes) {
+				if(!visited[adjacentNode]) {
+					visited[adjacentNode]=true;
+					nexts.add(adjacentNode);
+				}
+			}
+		}
+		System.out.println();
+	}
+	@Override
+	public void breadthFirstTraverse() {
+		System.out.println("Breadth first traversal modified");
+		Queue<Integer> nexts=new LinkedList<>();
+		boolean[] visited=new boolean[graph.size()];
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				visited[i]=true;
+				nexts.add(i);
+			}
+			while(!nexts.isEmpty()) {
+				int source=nexts.poll();
+				System.out.print(source+" ");
+				Set<Integer> adjacentNodes=graph.get(source);
+				for(int adjacentNode:adjacentNodes) {
+					if(!visited[adjacentNode]) {
+						visited[adjacentNode]=true;
+						nexts.add(adjacentNode);
+					}
+				}
+			}
+		}
+		
+		System.out.println();
+	}
+	@Override
+	public void depthFirstTraverse(int start) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverse() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverseRecursive(int start) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void depthFirstTraverseRecursive() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
