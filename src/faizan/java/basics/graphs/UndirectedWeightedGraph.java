@@ -4,7 +4,5 @@ public abstract class UndirectedWeightedGraph implements Undirected,Weighted {
 	public abstract void addEdge(int u,int v,int w) ;
 	public abstract boolean areConnected(int u,int v);
 	public abstract void printGraph();
-	
-	public abstract void getShortestPrathTree(int source);
 	public abstract boolean isCyclic();
 }

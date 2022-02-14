@@ -2,8 +2,10 @@ package faizan.java.basics.graphs;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGraph{
 	int[][] graph;
@@ -34,29 +36,6 @@ public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGr
 	@Override
 	public int getWeight(int u, int v) {
 		return graph[u][v];
-	}
-	@Override
-	public void getShortestPrathTree(int source) {
-		boolean[] sptSet=new boolean[graph.length];
-		int[] distances=new int[graph.length];
-		for(int i=0;i<graph.length;i++) {
-			distances[i]=Integer.MAX_VALUE;
-		}
-		distances[source]=0;
-		for(int i=0;i<graph.length-1;i++) {
-			int ind=getMinimumDistanceNodeIndex(distances,sptSet);
-			sptSet[ind]=true;
-			int[] adjacentNodes=graph[ind];
-			for(int j=0;j<adjacentNodes.length;j++) {
-				if(adjacentNodes[j]!=0)
-					distances[j]=Math.min(distances[j], distances[ind]+adjacentNodes[j]);
-			}
-		}
-		System.out.println("Shortest path tree from node indexed "+source);
-		for(int i=0;i<distances.length;i++) {
-			System.out.printf("[%d,%d] ",i,distances[i]);
-		}
-		System.out.println();
 	}
 	private int getMinimumDistanceNodeIndex(int[] distances,boolean[] sptSet) {
 		int min=Integer.MAX_VALUE;
@@ -121,5 +100,70 @@ public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGr
 		if(parents[vertex]!=vertex)
 			parents[vertex]=getParent(parents[vertex],parents);
 		return parents[vertex];
+	}
+	@Override
+	public void shortestPathTree(int source) {
+		int[] parent=new int[graph.length];
+		int[] distance=new int[graph.length];
+		PriorityQueue<int[]> heap=new PriorityQueue<>((a1,a2)->a1[1]-a2[1]);
+		for(int i=0;i<graph.length;i++) {
+			parent[i]=i;
+			distance[i]=Integer.MAX_VALUE;
+			heap.add(new int[] {i,Integer.MAX_VALUE});
+		}
+		distance[source]=0;
+		Set<Integer> inSPT=new HashSet<>();
+		heap.add(new int[] {source,0});
+		while(inSPT.size()!=graph.length) {
+			int[] curr=heap.poll();
+			int u=curr[0];
+			int dist=curr[1];
+			if(inSPT.contains(u))
+				continue;
+			inSPT.add(u);
+			int[] adjacentNodes=graph[u];
+			for(int i=0;i<graph.length;i++) {
+				int v=i;
+				int edgeWeight=adjacentNodes[i];
+				if(edgeWeight==0 || inSPT.contains(v))
+					continue;
+				if(dist+edgeWeight<distance[v]) {
+					distance[v]=dist+edgeWeight;
+					parent[v]=u;
+					heap.add(new int[] {v,distance[v]});
+				}
+			}
+		}
+		Set<Integer> unreachable=new HashSet<>();
+		System.out.println("Shortest path for indices");
+		for(int i=0;i<graph.length;i++) {
+			System.out.print(i+" : ");
+			Stack<Integer> path=new Stack<>();
+			int curr=i;
+			while(parent[curr]!=curr) {
+				path.push(curr);
+				curr=parent[curr];
+			}
+			if(curr!=source) {
+				System.out.println("Unreachable");
+				unreachable.add(i);
+				continue;
+			}
+			System.out.print(curr);
+			while(!path.isEmpty()) {
+				System.out.print("->"+path.pop());
+			}
+			System.out.println();
+		}
+		System.out.println("Shortest path tree from node indexed "+source);
+		for(int i=0;i<graph.length;i++) {
+			if(unreachable.contains(i)) {
+				System.out.printf("[%d,unreachable] ",i);				
+			}
+			else {
+				System.out.printf("[%d,%d] ",i,distance[i]);				
+			}
+		}
+		System.out.println();
 	}
 }

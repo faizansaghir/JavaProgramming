@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
@@ -123,5 +124,70 @@ public class MapDirectedWeightedGraph extends DirectedWeightedGraph {
 			}
 		}
 		result.add(index);
+	}
+	@Override
+	public void shortestPathTree(int source) {
+		int[] parent=new int[graph.size()];
+		int[] distance=new int[graph.size()];
+		PriorityQueue<int[]> heap=new PriorityQueue<>((a1,a2)->a1[1]-a2[1]);
+		for(int i=0;i<graph.size();i++) {
+			parent[i]=i;
+			distance[i]=Integer.MAX_VALUE;
+			heap.add(new int[] {i,Integer.MAX_VALUE});
+		}
+		distance[source]=0;
+		Set<Integer> inSPT=new HashSet<>();
+		heap.add(new int[] {source,0});
+		while(inSPT.size()!=graph.size()) {
+			int[] curr=heap.poll();
+			int u=curr[0];
+			int dist=curr[1];
+			if(inSPT.contains(u))
+				continue;
+			inSPT.add(u);
+			Set<GraphWeightedNode> adjacentNodes=graph.get(u);
+			for(GraphWeightedNode adjacentNode:adjacentNodes) {
+				int v=adjacentNode.index;
+				int edgeWeight=adjacentNode.weight;
+				if(inSPT.contains(v))
+					continue;
+				if(dist+edgeWeight<distance[v]) {
+					distance[v]=dist+edgeWeight;
+					parent[v]=u;
+					heap.add(new int[] {v,distance[v]});
+				}
+			}
+		}
+		Set<Integer> unreachable=new HashSet<>();
+		System.out.println("Shortest path for indices");
+		for(int i=0;i<graph.size();i++) {
+			System.out.print(i+" : ");
+			Stack<Integer> path=new Stack<>();
+			int curr=i;
+			while(parent[curr]!=curr) {
+				path.push(curr);
+				curr=parent[curr];
+			}
+			if(curr!=source) {
+				System.out.println("Unreachable");
+				unreachable.add(i);
+				continue;
+			}
+			System.out.print(curr);
+			while(!path.isEmpty()) {
+				System.out.print("->"+path.pop());
+			}
+			System.out.println();
+		}
+		System.out.println("Shortest path tree from node indexed "+source);
+		for(int i=0;i<graph.size();i++) {
+			if(unreachable.contains(i)) {
+				System.out.printf("[%d,unreachable] ",i);				
+			}
+			else {
+				System.out.printf("[%d,%d] ",i,distance[i]);				
+			}
+		}
+		System.out.println();
 	}
 }
