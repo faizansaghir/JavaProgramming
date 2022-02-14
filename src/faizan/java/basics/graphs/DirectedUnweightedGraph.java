@@ -6,8 +6,4 @@ public abstract class DirectedUnweightedGraph implements Directed,Unweighted {
 	public abstract void printGraph();
 	public abstract void topologicalSort();
 	public abstract void topologicalSortRecursive();
-	public abstract void depthFirstTraverse(int start);
-	public abstract void depthFirstTraverse();
-	public abstract void depthFirstTraverseRecursive(int start);
-	public abstract void depthFirstTraverseRecursive();
 }

@@ -153,23 +153,73 @@ public class AdjacencyListDirectedUnweightedGraph extends DirectedUnweightedGrap
 	}
 	@Override
 	public void depthFirstTraverse(int start) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Depth first traversal");
+		boolean[] visited=new boolean[graph.size()];		
+		Stack<Integer> nexts=new Stack<>();
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.isEmpty()) {
+			int source=nexts.pop();
+			System.out.print(source+" ");
+			Set<Integer> destinations=graph.get(source);
+			for(int destination:destinations) {
+				if(!visited[destination]) {
+					visited[destination]=true;
+					nexts.add(destination);
+				}
+			}
+		}
+		System.out.println();
 	}
 	@Override
 	public void depthFirstTraverse() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void depthFirstTraverseRecursive(int start) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Depth first traversal modified");
+		boolean[] visited=new boolean[graph.size()];		
+		Stack<Integer> nexts=new Stack<>();
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				nexts.add(i);
+				visited[i]=true;
+			}
+			while(!nexts.isEmpty()) {
+				int source=nexts.pop();
+				System.out.print(source+" ");
+				Set<Integer> destinations=graph.get(source);
+				for(int destination:destinations) {
+					if(!visited[destination]) {
+						visited[destination]=true;
+						nexts.add(destination);
+					}
+				}
+			}
+		}
+		System.out.println();
 	}
 	@Override
 	public void depthFirstTraverseRecursive() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Depth first traversal recursive modified");
+		boolean[] visited=new boolean[graph.size()];
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i])
+				depthFirstTraverse(i,visited);			
+		}
+		System.out.println();
 	}
-
+	@Override
+	public void depthFirstTraverseRecursive(int start) {
+		System.out.println("Depth first traversal recursive");
+		boolean[] visited=new boolean[graph.size()];
+		depthFirstTraverse(start,visited);
+		System.out.println();
+	}
+	private void depthFirstTraverse(int root,boolean[] visited) {
+		System.out.print(root+" ");
+		visited[root]=true;
+		Set<Integer> adjacentNodes=graph.get(root);
+		for(int adjacentNode:adjacentNodes) {
+			if(!visited[adjacentNode]) {
+				depthFirstTraverse(adjacentNode,visited);
+			}
+		}
+	}
 }

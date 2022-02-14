@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class MapUndirectedUnweightedGraph extends UndirectedUnweightedGraph {
 	Map<Integer,Set<Integer>> graph;
@@ -132,23 +133,76 @@ public class MapUndirectedUnweightedGraph extends UndirectedUnweightedGraph {
 	}
 	@Override
 	public void depthFirstTraverse(int start) {
-		// TODO Auto-generated method stub
-		
+		boolean[] visited=new boolean[graph.size()];
+		Stack<Integer> nexts=new Stack<>();
+		System.out.println("Depth first traversal");
+		nexts.add(start);
+		visited[start]=true;
+		while(!nexts.isEmpty()) {
+			int source=nexts.pop();
+			Set<Integer> destinations=graph.get(source);
+			System.out.print(source+" ");
+			for(int destination:destinations) {
+				if(!visited[destination]) {
+					nexts.add(destination);
+					visited[destination]=true;
+				}
+			}
+		}
+		System.out.println();
 	}
 	@Override
 	public void depthFirstTraverse() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void depthFirstTraverseRecursive() {
-		// TODO Auto-generated method stub
-		
+		boolean[] visited=new boolean[graph.size()];
+		Stack<Integer> nexts=new Stack<>();
+		System.out.println("Depth first traversal modified");
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				nexts.add(i);
+				visited[i]=true;
+			}
+			while(!nexts.isEmpty()) {
+				int source=nexts.pop();
+				Set<Integer> destinations=graph.get(source);
+				System.out.print(source+" ");
+				for(int destination:destinations) {
+					if(!visited[destination]) {
+						nexts.add(destination);
+						visited[destination]=true;
+					}
+				}
+			}			
+		}
+		System.out.println();
 	}
 	@Override
 	public void depthFirstTraverseRecursive(int start) {
-		// TODO Auto-generated method stub
-		
+		boolean[] visited=new boolean[graph.size()];
+		System.out.println("Depth first traversal recursive");
+		visited[start]=true;
+		depthFirstTraverse(start, visited);
+		System.out.println();
 	}
-
+	private void depthFirstTraverse(int start,boolean[] visited) {
+		System.out.print(start+" ");
+		Set<Integer> destinations=graph.get(start);
+		for(int destination:destinations) {
+			if(!visited[destination]) {
+				visited[destination]=true;
+				depthFirstTraverse(destination, visited);
+			}
+		}
+	}
+	@Override
+	public void depthFirstTraverseRecursive() {
+		boolean[] visited=new boolean[graph.size()];
+		System.out.println("Depth first traversal recursive modified");
+		for(int i=0;i<graph.size();i++) {
+			if(!visited[i]) {
+				visited[i]=true;
+				depthFirstTraverse(i, visited);				
+			}
+		}
+		System.out.println();
+	}
 }
