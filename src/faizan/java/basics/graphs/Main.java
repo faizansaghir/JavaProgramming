@@ -14,7 +14,6 @@ public class Main {
 //		graph1.depthFirstTraverseRecursive();
 //		graph1.breadthFirstTraverse(3);
 //		graph1.breadthFirstTraverse();
-//		System.out.println("Graph is cyclic : "+graph1.isCyclic());
 		UndirectedUnweightedGraph graph2=new AdjacencyListUndirectedUnweightedGraph(5);
 		graph2.addEdge(0, 1);
 		graph2.addEdge(0, 2);
@@ -26,7 +25,6 @@ public class Main {
 //		graph2.depthFirstTraverseRecursive();
 //		graph2.breadthFirstTraverse(3);
 //		graph2.breadthFirstTraverse();
-//		System.out.println("Graph is cyclic : "+graph2.isCyclic());
 		UndirectedUnweightedGraph graph3=new MapUndirectedUnweightedGraph(5);
 		graph3.addEdge(0, 1);
 		graph3.addEdge(0, 2);
@@ -38,7 +36,6 @@ public class Main {
 //		graph3.depthFirstTraverseRecursive();
 //		graph3.breadthFirstTraverse(3);
 //		graph3.breadthFirstTraverse();
-//		System.out.println("Graph is cyclic : "+graph3.isCyclic());
 		UndirectedWeightedGraph graph4=new AdjacencyMatrixUndirectedWeightedGraph(10);
 		graph4.addEdge(0, 1, 4);
 		graph4.addEdge(0, 7, 8);
@@ -56,9 +53,6 @@ public class Main {
 		graph4.addEdge(7, 8, 7);	
 //		graph4.printGraph();
 //		graph4.shortestPathTree(0);
-//		graph4.printGraph();
-//		graph4.getShortestPrathTree(0);
-//		System.out.println("Graph is cyclic : "+graph4.isCyclic());
 		UndirectedWeightedGraph graph5=new AdjacencyListUndirectedWeightedGraph(10);
 		graph5.addEdge(0, 1, 4);
 		graph5.addEdge(0, 7, 8);
@@ -76,7 +70,6 @@ public class Main {
 		graph5.addEdge(7, 8, 7);	
 //		graph5.printGraph();
 //		graph5.shortestPathTree(0);
-//		System.out.println("Graph is cyclic : "+graph5.isCyclic());
 		UndirectedWeightedGraph graph6=new MapUndirectedWeightedGraph(10);
 		graph6.addEdge(0, 1, 4);
 		graph6.addEdge(0, 7, 8);
@@ -94,8 +87,7 @@ public class Main {
 		graph6.addEdge(7, 8, 7);	
 //		graph6.printGraph();
 //		graph6.shortestPathTree(0);
-//		System.out.println("Graph is cyclic : "+graph6.isCyclic());
-		DirectedUnweightedGraph graph7=new AdjacencyMatrixDirectedUnweightedGraph(6);
+		DirectedUnweightedGraph graph7=new AdjacencyMatrixDirectedUnweightedGraph(5);
 		graph7.addEdge(0, 1);
 		graph7.addEdge(0, 2);
 		graph7.addEdge(1, 2);
@@ -103,15 +95,15 @@ public class Main {
 		graph7.addEdge(2, 3);
 		graph7.addEdge(2, 4);
 //		graph7.printGraph();
+//		graph7.topologicalSort();
+//		graph7.topologicalSortRecursive();
 //		graph7.depthFirstTraverse(0);
 //		graph7.depthFirstTraverse();
 //		graph7.depthFirstTraverseRecursive(0);
 //		graph7.depthFirstTraverseRecursive();
 //		graph7.breadthFirstTraverse(0);
 //		graph7.breadthFirstTraverse();
-//		graph7.topologicalSort();
-//		graph7.topologicalSortRecursive();
-		DirectedUnweightedGraph graph8=new AdjacencyListDirectedUnweightedGraph(6);
+		DirectedUnweightedGraph graph8=new AdjacencyListDirectedUnweightedGraph(5);
 		graph8.addEdge(0, 1);
 		graph8.addEdge(0, 2);
 		graph8.addEdge(1, 2);
@@ -119,15 +111,15 @@ public class Main {
 		graph8.addEdge(2, 3);
 		graph8.addEdge(2, 4);
 //		graph8.printGraph();
+//		graph8.topologicalSort();
+//		graph8.topologicalSortRecursive();
 //		graph8.depthFirstTraverse(0);
 //		graph8.depthFirstTraverse();
 //		graph8.depthFirstTraverseRecursive(0);
 //		graph8.depthFirstTraverseRecursive();
 //		graph8.breadthFirstTraverse(0);
 //		graph8.breadthFirstTraverse();
-//		graph8.topologicalSort();
-//		graph8.topologicalSortRecursive();
-		DirectedUnweightedGraph graph9=new MapDirectedUnweightedGraph(6);
+		DirectedUnweightedGraph graph9=new MapDirectedUnweightedGraph(5);
 		graph9.addEdge(0, 1);
 		graph9.addEdge(0, 2);
 		graph9.addEdge(1, 2);
@@ -135,15 +127,15 @@ public class Main {
 		graph9.addEdge(2, 3);
 		graph9.addEdge(2, 4);
 //		graph9.printGraph();
+//		graph9.topologicalSort();
+//		graph9.topologicalSortRecursive();
 //		graph9.depthFirstTraverse(0);
 //		graph9.depthFirstTraverse();
 //		graph9.depthFirstTraverseRecursive(0);
 //		graph9.depthFirstTraverseRecursive();
 //		graph9.breadthFirstTraverse(0);
 //		graph9.breadthFirstTraverse();
-//		graph9.topologicalSort();
-//		graph9.topologicalSortRecursive();
-		DirectedWeightedGraph graph10=new AdjacencyMatrixDirectedWeightedGraph(10);
+		DirectedWeightedGraph graph10=new AdjacencyMatrixDirectedWeightedGraph(9);
 		graph10.addEdge(0, 1, 4);
 		graph10.addEdge(0, 7, 8);
 		graph10.addEdge(1, 2, 8);
@@ -159,11 +151,10 @@ public class Main {
 		graph10.addEdge(6, 8, 6);
 		graph10.addEdge(7, 8, 7);
 //		graph10.printGraph();
-//		graph10.shortestPathTree(0);
-//		graph10.printGraph();
 //		graph10.topologicalSort();
 //		graph10.topologicalSortRecursive();
-		DirectedWeightedGraph graph11=new AdjacencyListDirectedWeightedGraph(10);
+//		graph10.shortestPathTree(0);
+		DirectedWeightedGraph graph11=new AdjacencyListDirectedWeightedGraph(9);
 		graph11.addEdge(0, 1, 4);
 		graph11.addEdge(0, 7, 8);
 		graph11.addEdge(1, 2, 8);
@@ -179,10 +170,10 @@ public class Main {
 		graph11.addEdge(6, 8, 6);
 		graph11.addEdge(7, 8, 7);
 //		graph11.printGraph();
-//		graph11.shortestPathTree(0);
 //		graph11.topologicalSort();
 //		graph11.topologicalSortRecursive();
-		DirectedWeightedGraph graph12=new MapDirectedWeightedGraph(10);
+//		graph11.shortestPathTree(0);
+		DirectedWeightedGraph graph12=new MapDirectedWeightedGraph(9);
 		graph12.addEdge(0, 1, 4);
 		graph12.addEdge(0, 7, 8);
 		graph12.addEdge(1, 2, 8);
@@ -198,9 +189,9 @@ public class Main {
 		graph12.addEdge(6, 8, 6);
 		graph12.addEdge(7, 8, 7);
 //		graph12.printGraph();
-//		graph12.shortestPathTree(0);
 //		graph12.topologicalSort();
 //		graph12.topologicalSortRecursive();
+//		graph12.shortestPathTree(0);
 	}
 
 }

@@ -37,17 +37,6 @@ public class AdjacencyMatrixUndirectedWeightedGraph extends UndirectedWeightedGr
 	public int getWeight(int u, int v) {
 		return graph[u][v];
 	}
-	private int getMinimumDistanceNodeIndex(int[] distances,boolean[] sptSet) {
-		int min=Integer.MAX_VALUE;
-		int index=-1;
-		for(int i=0;i<distances.length;i++) {
-			if(!sptSet[i] && distances[i]<=min) {
-				index=i;
-				min=distances[i];
-			}
-		}
-		return index;
-	}
 	@Override
 	public boolean isCyclic() {	
 		int v=graph.length;
